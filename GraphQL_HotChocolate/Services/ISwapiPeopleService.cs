@@ -6,11 +6,25 @@ namespace GraphQL_HotChocolate.Services
     public interface ISwapiPeopleService
     {
         /// <summary>
-        /// Get the person, identified by its ID, from the remote API service
+        /// Get the all data from the people pages
         /// </summary>
-        /// <param name="id">The ID of the desired person to be retrieved</param>
         /// <returns>The person object, if exists, NULL otherwise</returns>
-        Task<SwapiPerson> GetPersonFromApiById(int id);
-        People? List();
+        Task<SwapiPeople> GetSwapiPeople();
+
+        /// <summary>
+        /// Get swapi person specifieing the id 
+        /// </summary>
+        /// <param name="id">The ID of the the person</param>
+        /// <returns>It will return the person object or null</returns>
+        Task<SwapiPerson> GetSwapiPersonById(int id);
+
+        /// <summary>
+        /// Get swapi person specifieing the id 
+        /// </summary>
+        /// <param name="id">The ID of the the person</param>
+        /// <returns>It will return the person object or null</returns>
+  
+        //Task AddSwapiPerson(SwapiPerson person);
+
     }
 }

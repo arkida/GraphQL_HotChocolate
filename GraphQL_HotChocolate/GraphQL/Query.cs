@@ -1,6 +1,7 @@
 ﻿using GraphQL_HotChocolate.Services;
 using GraphQL_HotChocolate.Repository;
 using GraphQL_HotChocolate.Model;
+using HotChocolate.AspNetCore.Authorization;
 
 namespace GraphQL_HotChocolate.GraphQL
 {
@@ -14,13 +15,16 @@ namespace GraphQL_HotChocolate.GraphQL
             _repo = repo;
         }
 
-        public People? List()
+        [Authorize(Policy = "Admin")]
+        public Task<SwapiPeople> GetSwapiPeople()
         {
-            return   _service.List();
+            return _service.GetSwapiPeople();
         }
-        public async Task<SwapiPerson> SwapiPerson(int id)
+
+
+        public async Task<SwapiPerson> GetSwapiPerson(int id)
         {
-            var person = await _service.GetPersonFromApiById(id);
+            var person = await _service.GetSwapiPersonById(id);
             
             return person;
         }

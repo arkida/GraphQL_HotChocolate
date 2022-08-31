@@ -13,17 +13,14 @@ namespace GraphQL_HotChocolate.DAL
         }
 
         public DbSet<SwapiPerson> SwapiPerson { get; set; }
-        public DbSet<People> Peoples { get; set; }
+        public DbSet<SwapiPeople> SwapiPeople { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             // Convert the array of strings as a combined comma separated text.
-
-            // The Vehicles property
-            builder.Entity<People>()
-            .Property(e => e.Results);
+            builder.Entity<SwapiPeople>();
 
             // The Vehicles property
             builder.Entity<SwapiPerson>()

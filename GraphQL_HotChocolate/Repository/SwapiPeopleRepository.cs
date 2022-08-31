@@ -17,38 +17,13 @@ namespace GraphQL_HotChocolate.Repository
             _db = db.CreateDbContext();
         }
 
-        public async Task<SwapiPerson> Add(SwapiPerson person)
+        public async Task<List<SwapiPeople>> GetSwapiPeople()
         {
-            await _db.SwapiPerson.AddAsync(person);
-            await _db.SaveChangesAsync();
-            return person;
+            return await _db.SwapiPeople.ToListAsync();
+
         }
 
-        //public async Task<People> GetAll()
-        //{
-        //    //return await _db.People.ToListAsync();
-        //}
-
-        public People? List()
-        {
-            var client = new RestClient("https://swapi.dev/api/people/");
-            var request = new RestRequest();
-            var response = client.Execute(request);
-
-
-            try
-            {
-                return JsonConvert.DeserializeObject<People?>(response.Content);
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return null;
-        }
-
-            public async Task<SwapiPerson> GetByID(int id)
+        public async Task<SwapiPerson> GetSwapiPersonByID(int id)
         {
             return await _db.SwapiPerson.FirstOrDefaultAsync(p => p.Id == id);
         }
@@ -64,29 +39,29 @@ namespace GraphQL_HotChocolate.Repository
             return isexist;
         }
 
-        public int Count()
+        public async Task<SwapiPerson> Add(SwapiPerson person)
         {
-            return _db.SwapiPerson.Count();
+            _db.SwapiPerson.Add(person);
+            await _db.SaveChangesAsync();
+            return person;
         }
 
         public async Task<SwapiPerson> Update(SwapiPerson person)
         {
-            //_db.Entry(person).State = EntityState.Modified;
             var result = await _db.SwapiPerson.FirstOrDefaultAsync(p => p.Id == person.Id);
             result.Name = person.Name;
             result.Mass = person.Mass;
-            //result.Edited = person.Edited;
-            //result.BirthYear = person.BirthYear;
-            //result.Url = person.Url;
-            //result.EyeColor = person.EyeColor;
-            //result.Height = person.Height;
-            //result.HomeworId = person.HomeworId;
-            //result.HairColor = person.HairColor;
-            result.Vehicles = person.Vehicles;
-            //result.Created = person.Created;
-            result.Films = person.Films;
+            result.BirthYear = person.BirthYear;           
+            result.Height = person.Height;
+            result.EyeColor = person.EyeColor;
+            result.SkinColor = person.SkinColor;
+            result.HairColor = person.HairColor;
             result.Gender = person.Gender;
-            //result.SkinColor = person.SkinColor;
+            result.HomeworId = person.HomeworId;           
+            result.Vehicles = person.Vehicles;
+            result.Films = person.Films;
+            result.Edited = person.Edited;
+            result.Url = person.Url;
             await _db.SaveChangesAsync();
             return result;
         }
