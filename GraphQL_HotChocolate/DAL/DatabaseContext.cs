@@ -19,7 +19,7 @@ namespace GraphQL_HotChocolate.DAL
         {
             base.OnModelCreating(builder);
 
-            // Convert the array of strings as a combined comma separated text.
+       
             builder.Entity<SwapiPeople>();
 
             // The Vehicles property

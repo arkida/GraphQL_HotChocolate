@@ -1,16 +1,5 @@
 ﻿schema {
   query: Query
-  mutation: Mutation
-}
-
-type AuthorizeDirective {
-  policy: String
-  roles: [String!]
-  apply: ApplyPolicy!
-}
-
-type Mutation {
-  addSwapiPerson(sperson: SwapiPersonInput!): SwapiPerson!
 }
 
 type Query {
@@ -50,34 +39,6 @@ type SwapiPerson {
   isSuccessful: Boolean!
   code: String!
   message: String!
-}
-
-input SwapiPersonInput {
-  id: Int!
-  name: String!
-  height: String!
-  mass: String!
-  hairColor: String!
-  skinColor: String!
-  eyeColor: String!
-  birthYear: String!
-  gender: String!
-  homeworId: String!
-  films: [String!]
-  species: [String!]
-  vehicles: [String!]
-  starships: [String!]
-  created: String!
-  edited: String!
-  url: String!
-  isSuccessful: Boolean!
-  code: String!
-  message: String!
-}
-
-enum ApplyPolicy {
-  BEFORE_RESOLVER
-  AFTER_RESOLVER
 }
 
 "The `@defer` directive may be provided for fragment spreads and inline fragments to inform the executor to delay the execution of the current fragment to indicate deprioritization of the current fragment. A query with `@defer` directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred is delivered in a subsequent response. `@include` and `@skip` take precedence over `@defer`."

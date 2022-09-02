@@ -43,10 +43,6 @@ namespace GraphQL_HotChocolate.Services
             {
                 person = _client.GetFromJsonAsync<SwapiPerson>(id.ToString());
 
-                if (string.IsNullOrEmpty(person.Result.Id.ToString()))
-                {
-                    throw new NotFoundException("There is no swapi person for this id.");
-                }
             }
             catch (Exception ex)
             {
